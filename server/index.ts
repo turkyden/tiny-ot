@@ -3,7 +3,7 @@ import { parse } from 'url'
 import next from 'next'
 import WebSocket from 'ws'
 import ShareDB from 'sharedb'
-import WebSocketJSONStream from '@teamwork/websocket-json-stream'
+import WebSocketJSONStream from './WebSocketJSONStream';
 
 const port = parseInt(process.env.PORT || '3000', 10)
 const dev = process.env.NODE_ENV !== 'production'
@@ -24,11 +24,11 @@ app.prepare().then(() => {
     }
   })
 
-  const webSocketServer = WebSocket.Server({server: server});
+  const webSocketServer = new WebSocket.Server({server: server});
 
   const backend = new ShareDB();
 
-  webSocketServer.on('connection', (webSocket: any) => {
+  webSocketServer.on('connection', (webSocket: WebSocket) => {
     const stream = new WebSocketJSONStream(webSocket)
     backend.listen(stream)
   })

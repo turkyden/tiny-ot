@@ -1,3 +1,3 @@
-export default function A() {
+export default function Doc() {
   return <div>a</div>
 }
