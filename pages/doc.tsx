@@ -3,6 +3,8 @@ import ReconnectingWebSocket from 'reconnecting-websocket';
 import { Connection, Doc } from 'sharedb/lib/client';
 import { useEffect, useRef, useState } from 'react';
 
+
+
 export default function A() {
   const ref = useRef<Doc<any>>();
 
@@ -11,7 +13,8 @@ export default function A() {
   const onClick = () => ref.current?.submitOp([{p: ['counter'], na: 1}]);
 
   useEffect(() => {
-    const socket = new ReconnectingWebSocket('ws://localhost:3000');
+    const port = parseInt(process.env.PORT || '3000', 10);
+    const socket = new ReconnectingWebSocket(`ws://localhost:${port}`);
     const connection = new Connection(socket as any);
     ref.current = connection.get('doc-collection', 'doc-id');
 
