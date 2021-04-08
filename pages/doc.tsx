@@ -14,7 +14,8 @@ export default function A() {
 
   useEffect(() => {
     const port = parseInt(process.env.PORT || '3000', 10);
-    const socket = new ReconnectingWebSocket(`ws://localhost:${port}`);
+    const host = window.location.host;
+    const socket = new ReconnectingWebSocket(`ws://${host}:${port}`);
     const connection = new Connection(socket as any);
     ref.current = connection.get('doc-collection', 'doc-id');
 
