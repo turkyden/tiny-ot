@@ -13,9 +13,8 @@ export default function A() {
   const onClick = () => ref.current?.submitOp([{p: ['counter'], na: 1}]);
 
   useEffect(() => {
-    const port = parseInt(process.env.PORT || '3000', 10);
-    const host = window.location.host;
-    const socket = new ReconnectingWebSocket(`wss://${host}:${port}`);
+    const port = parseInt(process.env.PORT || '8080', 10);
+    const socket = new ReconnectingWebSocket(`ws://localhost:${port}`);
     const connection = new Connection(socket as any);
     ref.current = connection.get('doc-collection', 'doc-id');
 
