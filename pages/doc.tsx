@@ -14,7 +14,7 @@ export default function A() {
 
   useEffect(() => {
     const port = parseInt(process.env.PORT || '8080', 10);
-    const socket = new ReconnectingWebSocket(`ws://localhost:${port}`);
+    const socket = new ReconnectingWebSocket(`wss://tiny-ot.vercel.app:${port}`);
     const connection = new Connection(socket as any);
     ref.current = connection.get('doc-collection', 'doc-id');
 
